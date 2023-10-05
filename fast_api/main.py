@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from routers import products, users
 
 # Start server: from uvicorn main:app --reload
 # Stop server:  ctrl+c
@@ -9,6 +10,10 @@ from fastapi import FastAPI
 # API json:              http://127.0.0.1:8000/openapi.json
 
 app = FastAPI()
+
+# routers
+app.include_router(products.router)
+app.include_router(users.router)
 
 @app.get("/")
 async def root():
