@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routers import products, users
+from fastapi.staticfiles import StaticFiles
 
 # Start server: from uvicorn main:app --reload
 # Stop server:  ctrl+c
@@ -14,6 +15,7 @@ app = FastAPI()
 # routers
 app.include_router(products.router)
 app.include_router(users.router)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def root():
