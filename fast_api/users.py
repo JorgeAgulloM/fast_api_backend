@@ -31,16 +31,16 @@ async def users():
 # Path /user/1 -> return user id == 1
 @app.get("/user/{id}")
 async def user(id: int):
-    return search_user(id)
+    return _search_user(id)
     
 # Query /userquery/?id=1 -> return user id == 1
 @app.get("/userquery/")
 async def user(id: int):
-    return search_user(id)
+    return _search_user(id)
     
 @app.post("/user/")
 async def user(user: User):
-    if type(search_user(user.id)) == User:
+    if type(_search_user(user.id)) == User:
         return {"error": "El usuario ya existe"}
     user_list.append(user)
     return user    
@@ -53,7 +53,19 @@ async def user(user: User):
             return user
     return {"error": "No se ha encontrado al usuario"}
 
-def search_user(id: int):
+@app.delete("/user/{id}")
+async def delete(id: int):
+    for idx, user in enumerate(user_list):
+        if user.id == id:
+            del user_list[idx]
+            return {"message": "Usuario eliminado"}
+    return {"error": "No se ha encontrado el usuario"}
+
+#####################
+##### functions #####
+#####################
+
+def _search_user(id: int):
     user = filter(lambda user: user.id == id, user_list)
     try:
         return list(user)[0]
