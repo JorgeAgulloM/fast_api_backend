@@ -17,3 +17,13 @@ async def root():
 @app.get("/url")
 async def url():
     return {"url_project": "https://github.com/JorgeAgulloM/fast_api_backend"}
+
+# @app.get()
+# @app.post()
+# @app.put()
+# @app.delete()
+#
+# @app.options()
+# @app.head()
+# @app.patch()
+# @app.trace()
