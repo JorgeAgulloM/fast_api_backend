@@ -40,12 +40,18 @@ async def user(id: int):
     
 @app.post("/user/")
 async def user(user: User):
-    if search_user(user.id):
+    if type(search_user(user.id)) == User:
         return {"error": "El usuario ya existe"}
-    else:
-        user_list.append(user)
-        return {"message": "Usuario añadido"}    
+    user_list.append(user)
+    return user    
 
+@app.put("/user/")
+async def user(user: User):
+    for idx, saved_user in enumerate(user_list):
+        if saved_user.id == user.id:
+            user_list[idx] = user
+            return user
+    return {"error": "No se ha encontrado al usuario"}
 
 def search_user(id: int):
     user = filter(lambda user: user.id == id, user_list)
