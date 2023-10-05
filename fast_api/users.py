@@ -40,7 +40,7 @@ async def user(id: int):
     
 @app.post("/user/")
 async def user(user: User):
-    if type(search_user(user.id)) == User:
+    if search_user(user.id):
         return {"error": "El usuario ya existe"}
     else:
         user_list.append(user)
