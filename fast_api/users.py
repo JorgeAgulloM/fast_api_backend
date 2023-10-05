@@ -38,6 +38,15 @@ async def user(id: int):
 async def user(id: int):
     return search_user(id)
     
+@app.post("/user/")
+async def user(user: User):
+    if type(search_user(user.id)) == User:
+        return {"error": "El usuario ya existe"}
+    else:
+        user_list.append(user)
+        return {"message": "Usuario añadido"}    
+
+
 def search_user(id: int):
     user = filter(lambda user: user.id == id, user_list)
     try:
