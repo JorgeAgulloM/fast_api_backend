@@ -63,8 +63,7 @@ async def current_user(token: str = Depends(oauth2)):
 @app.post("/login")
 async def login(form: OAuth2PasswordRequestForm = Depends()):
     user_db = users_db.get(form.username)
-    print(user_db)
-    print(form.username)
+
     if not user_db:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="El usuario no es correcto")
     
