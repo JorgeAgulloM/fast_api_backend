@@ -4,10 +4,11 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
+import os
 
 ALGORITHM ="HS256"
 ACCES_TOKEN_DURATION = 1
-SECRET = "075bcee72a66899888d94248ea24ba44f821eb8a1452ce44c3679b3687bc796c"
+SECRET = os.environ.get('SECRET')
 
 router = APIRouter()
 
