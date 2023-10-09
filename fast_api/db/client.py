@@ -1,4 +1,3 @@
 from pymongo import MongoClient
 
-db_client = MongoClient() #Por defecto se conecta a localhost
-
+db_client = MongoClient().local #Por defecto se conecta a localhost
